@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
 const { authMiddleware } = require('../middleware')
-const { Account } = require('../db')
+const { Account, Transaction } = require('../db')
 
 router.get('/balance', authMiddleware, async (req, res) => {
     const account = await Account.findOne({
@@ -44,6 +44,54 @@ router.post('/transfer', authMiddleware, async (req, res) => {
 
         //Commit the tranaction
         await session.commitTransaction();
+
+        //For updating Transaction in Sender DB
+        const existingSender = await Transaction.findOne({ userId: req.userId });
+        if (existingSender) {
+            const newTransaction = {
+                amount: amount,
+                type: 'Debit',
+                recipientId: to,
+                timestamp: new Date(),
+            }
+            await Transaction.updateOne({ userId: req.userId }, { $push: { transactions: newTransaction } })
+        } else {
+            await Transaction.create({
+                userId: req.userId,
+                transactions: [
+                    {
+                        amount: amount,
+                        type: 'Debit',
+                        recipientId: to,
+                        timestamp: new Date()
+                    }
+                ]
+            })
+        }
+        //For updating Transaction in Reciever DB
+        const existingReciever = await Transaction.findOne({ userId: to });
+        if (existingReciever) {
+            const newTransaction = {
+                amount: amount,
+                type: 'Credit',
+                recipientId: req.userId,
+                timestamp: new Date(),
+            }
+            await Transaction.updateOne({ userId: to }, { $push: { transactions: newTransaction } })
+        } else {
+            await Transaction.create({
+                userId: to,
+                transactions: [
+                    {
+                        amount: amount,
+                        type: 'Credit',
+                        recipientId: req.userId,
+                        timestamp: new Date()
+                    }
+                ]
+            })
+        }
+
         return res.status(200).json({
             message: "Transfer successful"
         })

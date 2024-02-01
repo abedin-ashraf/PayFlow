@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const zod = require('zod');
 const { authMiddleware } = require('../middleware')
 const { JWT_SECRET } = require('../config');
-const { User, Account } = require('../db');
+const { User, Account, Transaction } = require('../db');
 
 const signupBody = zod.object({
     username: zod.string().email(),
@@ -15,7 +15,6 @@ const signupBody = zod.object({
 
 
 router.post('/signup', async (req, res) => {
-
     const { success } = signupBody.safeParse(req.body);
     if (!success) {
         return res.status(411).json({
@@ -42,7 +41,7 @@ router.post('/signup', async (req, res) => {
     //Creating a new Account for the User
     await Account.create({
         userId,
-        balance: 1 + Math.random() * 10000
+        balance: (1 + Math.random() * 10000).toFixed(2)
     })
     //////////////////////////////////////
 
@@ -106,8 +105,9 @@ router.put('/', authMiddleware, async (req, res) => {
 
 })
 
-router.get('/bulk', async (req, res) => {
+router.get('/bulk', authMiddleware, async (req, res) => {
     const filter = req.query.filter || "";
+    const userId = req.userId;
 
     const users = await User.find({
         $or: [{
@@ -121,8 +121,11 @@ router.get('/bulk', async (req, res) => {
         }
         ]
     })
+
+    const users2 = users.filter(user => user._id != userId);
+
     res.status(200).json({
-        users: users.map(user => ({
+        users: users2.map(user => ({
             username: user.username,
             firstName: user.firstName,
             lastName: user.lastName,
@@ -130,4 +133,46 @@ router.get('/bulk', async (req, res) => {
         }))
     })
 })
+
+////////////////////////////// TO GET TRANSACTION ///////////////////////
+
+router.get('/transactions', authMiddleware, async (req, res) => {
+    const userId = req.userId;
+
+    const data = await Transaction.findOne({ userId: userId });
+    if (data) {
+        res.status(200).json({
+            transaction: data.transactions
+        })
+        return;
+    }
+    res.status(200).json({
+        transaction: [],
+    })
+
+})
+
+
+
+
+
+///////////////////////////////// GET NAME //////////////////////////////////////////
+
+router.get('/name', authMiddleware, async (req, res) => {
+    const id = req.userId;
+
+    const existingUser = await User.findOne({ _id: id });
+
+    res.status(200).json({
+        firstName: existingUser.firstName,
+        lastName: existingUser.lastName,
+        username: existingUser.username
+    })
+})
+
+
+
+
+
+
 module.exports = router;
