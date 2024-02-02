@@ -44,7 +44,7 @@ export const Signin = () => {
 
                 <InputBox onChange={e => {
                     setUserName(e.target.value);
-                }} placeholder="harkirat@gmail.com" label={"Email"} />
+                }} placeholder="ashraf@gmail.com" label={"Email"} />
 
                 <InputBox onChange={e => {
                     setPassword(e.target.value);
@@ -52,7 +52,7 @@ export const Signin = () => {
                 <div className="pt-4">
                     <Button onClick={async () => {
                         try {
-                            const response = await axios.post('http://localhost:3000/api/v1/user/signin', { username, password });
+                            const response = await axios.post('https://payflow-backend.onrender.com/api/v1/user/signin', { username, password });
                             localStorage.setItem('token', response.data.token);
                             toast("Signed in successfully");
                             setTimeout(() => {

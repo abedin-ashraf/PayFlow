@@ -13,7 +13,7 @@ export const Dashboard = () => {
     const [value, setValue] = useState();
 
     useEffect(() => {
-        axios.get('http://localhost:3000/api/v1/account/balance', {
+        axios.get('https://payflow-backend.onrender.com/api/v1/account/balance', {
             headers: {
                 Authorization: localStorage.getItem('token')
             }

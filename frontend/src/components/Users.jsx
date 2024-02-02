@@ -12,7 +12,7 @@ export const Users = () => {
 
     //Should add debouncing
     useEffect(() => {
-        axios.get('http://localhost:3000/api/v1/user/bulk?filter=' + filter, {
+        axios.get('https://payflow-backend.onrender.com/api/v1/user/bulk?filter=' + filter, {
             headers: {
                 Authorization: localStorage.getItem('token')
             }

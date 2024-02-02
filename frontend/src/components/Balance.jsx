@@ -8,7 +8,7 @@ export const Balance = ({ value }) => {
     const [name, setLastName] = useState("");
 
     useEffect(() => {
-        axios.get('http://localhost:3000/api/v1/user/name', {
+        axios.get('https://payflow-backend.onrender.com/api/v1/user/name', {
             headers: {
                 Authorization: localStorage.getItem('token')
             }

@@ -20,7 +20,7 @@ export const BankAndCards = () => {
                 <CreditCardIcon />
                 <div className='ml-4'>
                     <div>DISCOVER</div>
-                    <div className='text-sm'>Card endig with ********7384</div>
+                    <div className='text-sm'>Card endig with ********8465</div>
                 </div>
             </div>
         </div>

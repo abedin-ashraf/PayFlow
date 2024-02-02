@@ -12,7 +12,7 @@ import Paper from '@mui/material/Paper';
 export const Transaction = () => {
     const [transactions, setTransactions] = useState([]);
     useEffect(() => {
-        axios.get('http://localhost:3000/api/v1/user/transactions', {
+        axios.get('https://payflow-backend.onrender.com/api/v1/user/transactions', {
             headers: {
                 Authorization: localStorage.getItem('token')
             }
