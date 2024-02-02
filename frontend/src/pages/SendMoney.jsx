@@ -52,7 +52,7 @@ export const SendMoney = () => {
 
                         <button onClick={() => {
 
-                            axios.post("hhttps://payflow-backend.onrender.com/api/v1/account/transfer", { to: id, amount }, {
+                            axios.post("https://payflow-backend.onrender.com/api/v1/account/transfer", { to: id, amount }, {
                                 headers: {
                                     Authorization: localStorage.getItem('token')
                                 }
