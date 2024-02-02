@@ -31,7 +31,7 @@ export const Dashboard = () => {
         }} /></div>
 
         {/* <div className="grid grid-cols-2"> */}
-        <div className="flex justify-center">
+        <div className="md:flex justify-center">
             <div className="m-8">
                 <div><Balance value={value} /></div>
                 <div><BankAndCards /></div>
