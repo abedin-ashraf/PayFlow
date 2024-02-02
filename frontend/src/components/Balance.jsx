@@ -18,7 +18,7 @@ export const Balance = ({ value }) => {
 
 
 
-    return <div className='bg-white p-3 rounded-sm'>
+    return <div className='bg-white p-3 rounded-md'>
         <div className='flex justify-between items-center'>
             <div className='font-bold text-blue-500 text-lg'>Current Balance</div>
             <div className="text-xs" >{date.toString().substring(0, 15)}</div>

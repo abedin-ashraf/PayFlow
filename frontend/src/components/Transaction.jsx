@@ -22,7 +22,7 @@ export const Transaction = () => {
             })
     }, []);
 
-    return <div className="m-6 bg-white pt-4 rounded-sm" >
+    return <div className="m-6 bg-white pt-4 rounded-md" >
         <div className='font-bold text-base text-blue-500 text-center '>Recent Activity</div>
         <div className=" border-2">
             <TableContainer component={Paper}>
@@ -44,7 +44,7 @@ export const Transaction = () => {
                             >
                                 <TableCell align="center">{transaction.timestamp.slice(0, 16).replace("T", " ")}</TableCell>
                                 <TableCell align="center" component="th" scope="row">{transaction.amount}</TableCell>
-                                <TableCell align="center">{transaction.type}</TableCell>
+                                <TableCell align="center" className={`rounded-md ${transaction.type === 'Credit' ? 'bg-lime-400' : 'bg-red-400'}`}>{transaction.type}</TableCell>
                                 {/* <TableCell align="center">{value}</TableCell> */}
                                 <TableCell align="center">{transaction.recipientId}</TableCell>
                                 {/* <TableCell align="right">{row.protein}</TableCell> */}

@@ -3,7 +3,7 @@ import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 
 export const BankAndCards = () => {
-    return <div className='bg-white mt-6 p-3 rounded-sm'>
+    return <div className='bg-white mt-6 p-3 rounded-md'>
 
         <div className='font-bold text-blue-500 text-base'>Bank and cards</div>
         <hr className='' />
