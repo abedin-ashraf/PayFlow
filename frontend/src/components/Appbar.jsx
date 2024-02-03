@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import axios from "axios";
+import { Logo } from "./Logo";
 
 
 export const Appbar = ({ onClick }) => {
@@ -17,7 +18,9 @@ export const Appbar = ({ onClick }) => {
 
     return <div className="shadow h-14 flex justify-between">
         <div className="flex flex-col justify-center h-full ml-4">
-            PayFlow
+            <div className="font-mono text-blue-500 font-bold text-2xl">
+                PayFlow
+            </div>
         </div>
         <div className="flex">
             {/* <div className="flex flex-col justify-center h-full mr-4">
