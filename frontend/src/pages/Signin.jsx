@@ -4,6 +4,7 @@ import { Button } from "../components/Button"
 import { Heading } from "../components/Heading"
 import { InputBox } from "../components/InputBox"
 import { SubHeading } from "../components/SubHeading"
+import { Logo } from "../components/Logo"
 import { useNavigate } from "react-router-dom"
 
 import { GoogleOAuthProvider, GoogleLogin, useGoogleOneTapLogin } from '@react-oauth/google';
@@ -14,6 +15,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import axios from 'axios';
 
+
 export const Signin = () => {
     const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
@@ -23,7 +25,9 @@ export const Signin = () => {
 
     return <div className="bg-slate-300 h-screen flex justify-center">
         <div className="flex flex-col justify-center">
+
             <div className="rounded-lg bg-white w-80 text-center p-2 h-max px-4">
+                <Logo label={"PayFlow"} />
                 <Heading label={"Sign in"} />
 
                 {/* <GoogleOAuthProvider clientId="<crypto-metric-412908>">
@@ -63,7 +67,7 @@ export const Signin = () => {
                         }
                     }} label={"Sign in"} />
                 </div>
-                <BottomWarning label={"Don't have an account?"} buttonText={"Sign up"} to={"/signup"} />
+                <BottomWarning label={"Don't have an account?"} buttonText={"Sign up"} to={"/"} />
                 <ToastContainer
                     position="top-right"
                     autoClose={1000}
