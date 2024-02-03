@@ -139,7 +139,7 @@ router.get('/bulk', authMiddleware, async (req, res) => {
 router.get('/transactions', authMiddleware, async (req, res) => {
     const userId = req.userId;
 
-    const data = await Transaction.findOne({ userId: userId }).sort({ 'transactions.timestamp': 1 });
+    const data = await Transaction.findOne({ userId: userId }).sort({ 'transactions.timestamp': -1 });
     if (data) {
         res.status(200).json({
             transaction: data.transactions
