@@ -18,7 +18,7 @@ export const Transaction = () => {
             }
         })
             .then(response => {
-                setTransactions(response.data.transaction);
+                setTransactions(response.data.transaction.reverse());
             })
     }, []);
 
