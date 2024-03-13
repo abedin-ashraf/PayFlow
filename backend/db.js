@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 const { Schema, number } = require('zod');
-mongoose.connect("mongodb+srv://admin:FSzAE8q87LSd2faf@cluster0.uof1tyg.mongodb.net/payflow");
+const dotenv = require('dotenv');
+dotenv.config();
+
+
+mongoose.connect(process.env.DATABASE_URL);
 
 const UserSchema = new mongoose.Schema({
     username: {
